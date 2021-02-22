@@ -14,8 +14,8 @@ import random
 
 pylab.rcParams['figure.figsize'] = (8.0, 6.0)
 
-rgbAnnFile='./annotations/aauRainSnow-rgb.json'
-thermalAnnFile = './annotations/aauRainSnow-thermal.json'
+rgbAnnFile='../aauRainSnow-rgb.json'
+thermalAnnFile = '../aauRainSnow-thermal.json'
 
 rainSnowRgbGt = coco.COCO(rgbAnnFile)
 rainSnowThermalGt = coco.COCO(thermalAnnFile)
@@ -41,7 +41,7 @@ for item in images:
     matplotlib.rcParams['interactive'] == False
     
     print("\nRGB Image")
-    I = io.imread('./' + rgbImg['file_name'])
+    I = io.imread('../' + rgbImg['file_name'])
 
     fig = plt.figure(1)
     grid = plt.GridSpec(2,2)
@@ -60,7 +60,7 @@ for item in images:
 
     print("\nThermal Image")
     # Load thermal annotations
-    I = io.imread('./' + thermalImg['file_name'])
+    I = io.imread('../' + thermalImg['file_name'])
     ax2 = plt.subplot(grid[0,1])
     ax2.axis('off')
     plt.imshow(I)
