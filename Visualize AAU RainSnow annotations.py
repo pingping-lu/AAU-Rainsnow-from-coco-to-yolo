@@ -14,8 +14,8 @@ import random
 import cv2
 pylab.rcParams['figure.figsize'] = (8.0, 6.0)
 
-rgbAnnFile='./aauRainSnow-rgb.json'
-thermalAnnFile = './aauRainSnow-thermal.json'
+rgbAnnFile='../aauRainSnow-rgb.json'
+thermalAnnFile = '../aauRainSnow-thermal.json'
 
 rainSnowRgbGt = coco.COCO(rgbAnnFile)
 rainSnowThermalGt = coco.COCO(thermalAnnFile)
@@ -43,7 +43,7 @@ for i in range(0, 2197):
 
     matplotlib.rcParams['interactive'] == False
     print("\nRGB Image")
-    I = io.imread('./' + rgbImg['file_name'])
+    I = io.imread('../' + rgbImg['file_name'])
     plt.gcf().clear()
     plt.axis('off')
     plt.imshow(I);
@@ -55,7 +55,7 @@ for i in range(0, 2197):
 
     print("\nThermal Image")
     # Load thermal annotations
-    I = io.imread('./' + thermalImg['file_name'])
+    I = io.imread('../' + thermalImg['file_name'])
     plt.gcf().clear()
     plt.axis('off')
     plt.imshow(I);
