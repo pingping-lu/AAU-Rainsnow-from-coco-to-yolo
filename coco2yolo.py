@@ -6,6 +6,7 @@ import shutil
 from sklearn.model_selection import train_test_split
 import pdb
 import numpy as np
+import random
 
 parser = argparse.ArgumentParser(description='Splits COCO annotations file into training and test sets.')
 parser.add_argument('--root', type=str, help='Where to store COCO images')
@@ -19,6 +20,8 @@ parser.add_argument('--coco_category', dest='coco_category', action='store_true'
                     help='using coco class name')
 parser.add_argument('--label_only', dest='label_only', action='store_true',
                     help='only modify label folder')
+parser.add_argument('--sample',type=float, required=False, default=1,
+                    help='reduce the dataset size')
 
 args = parser.parse_args()
 
@@ -88,6 +91,14 @@ def main(args):
         else:
             x_val = y.copy()
             x_train = x.copy()
+
+        if args.sample:
+            random.shuffle(x_train)
+            random.shuffle(x_val)
+            random.shuffle(y)
+            x_train = x_train[:int(len(x_train)*args.sample)]
+            x_val = x_val[:int(len(x_val)*args.sample)]
+            y = y[:int(len(y)*args.sample)]
 
         if not args.coco_category:
             category_map = {item['id']:select_classes.index(item['name']) for item in categories if item['name'] in select_classes}
